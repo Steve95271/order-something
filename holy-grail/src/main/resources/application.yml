@@ -1,0 +1,12 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: "holy-grail"
+  profiles:
+    active: local
+  datasource:
+    url: jdbc:mysql://${holy-grail.datasource.host}:${holy-grail.datasource.port}/${holy-grail.datasource.database}
+    username: ${holy-grail.datasource.username}
+    password: ${holy-grail.datasource.password}
+    driver-class-name: ${holy-grail.datasource.driver-class-name}
