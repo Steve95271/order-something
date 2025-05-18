@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import "./FoodItem.css";
 
-interface Item {
+interface FoodItemDetailInfo {
   id: number;
   name: string;
   price: number;
@@ -10,7 +11,7 @@ interface Item {
 }
 
 function FoodItem() {
-  const [item, setItem] = useState<Item | null>();
+  const [item, setItem] = useState<FoodItemDetailInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>();
 
@@ -18,7 +19,7 @@ function FoodItem() {
     fetch("http://localhost:8080/food/item")
       .then(async (response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data: Item = await response.json();
+        const data: FoodItemDetailInfo = await response.json();
         console.log(data);
         setItem(data);
       })
@@ -34,17 +35,49 @@ function FoodItem() {
   if (!item) return <p>No data.</p>;
 
   return (
-    <div>
-      <img src={item.pictureUrl} alt={item.name} style={{ width: "300px" }} />
-      <h2>{item.name}</h2>
-      <p>
-        <strong>Price:</strong> £{item.price.toFixed(2)}
-      </p>
-      <p>
-        <strong>Calories:</strong> {item.calorie}
-      </p>
-      <p>{item.description}</p>
+    <div className="food-item">
+      <img src={item.pictureUrl} alt={item.name} />
+      <section>
+        <FoodItemDetail
+          name={item.name}
+          price={item.price}
+          calorie={item.calorie}
+          description={item.description}
+        />
+      </section>
     </div>
+  );
+}
+
+/**
+ * Render food item detail
+ * @param name The name of the food
+ * @param price Price
+ * @param calorie Calorie
+ * @param description Food description
+ */
+function FoodItemDetail({
+  name,
+  price,
+  calorie,
+  description,
+}: {
+  name: string;
+  price: number;
+  calorie: number;
+  description: string;
+}) {
+  return (
+    <>
+      <h2>{name}</h2>
+      <p>
+        <strong>Price:</strong> £{price.toFixed(2)}
+      </p>
+      <p>
+        <strong>Calories:</strong> {calorie}
+      </p>
+      <p>{description}</p>
+    </>
   );
 }
 
