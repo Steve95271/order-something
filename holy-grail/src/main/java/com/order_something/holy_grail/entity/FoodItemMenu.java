@@ -1,31 +1,21 @@
 package com.order_something.holy_grail.entity;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import java.util.ArrayList;
 
+@Data
+@AllArgsConstructor
 public class FoodItemMenu {
 
-    @Getter
-    private String title;
-    @Getter
-    private final ArrayList<FoodItem> foodItems;
 
-    public FoodItemMenu(String title) {
-        this.title = title;
-        this.foodItems = new ArrayList<>();
-    }
+    private Long Id;
+    private String title;
+    private final ArrayList<FoodItem> foodItems;
 
     public void addFoodItem(FoodItem foodItem) {
         this.foodItems.add(foodItem);
-    }
-
-    public void removeFoodItem(FoodItem foodItem) {
-        this.foodItems.remove(foodItem);
-    }
-
-    public FoodItem getFoodItem(int index) {
-        return this.foodItems.get(index);
     }
 
 }

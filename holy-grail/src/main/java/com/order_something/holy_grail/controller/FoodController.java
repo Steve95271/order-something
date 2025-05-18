@@ -13,17 +13,42 @@ import java.util.ArrayList;
 @RequestMapping("/food")
 public class FoodController {
 
+    @GetMapping("/item")
+    public FoodItem getItem() {
+        FoodItem mcSpicy = new FoodItem(
+                1L,
+                "McSpicy® x Frank's RedHot®",
+                new BigDecimal("6.59"),
+                507,
+                "Hot and spicy 100% chicken breast in a crispy coating, served with lettuce, cheese made with Emmental, jalapenos, onions and a Frank’s RedHot® Mayo in a sesame seed bun. Allergen information available at www.mcdonalds.co.uk/nutrition",
+                "https://stevefengsbucket.s3.eu-west-2.amazonaws.com/Holy_Grail/mc_burger.avif"
+        );
+        return mcSpicy;
+    }
+
     @GetMapping("/menu")
-    public FoodItemMenu foodMenu() {
-        FoodItemMenu menu = new FoodItemMenu("Featured");
-        FoodItem foodItem1 = new FoodItem("McSpicy® x Frank's RedHot®", "Hot and spicy 100% chicken breast in a crispy coating, served with lettuce, cheese made with Emmental, jalapenos, onions and a Frank’s RedHot® Mayo in a sesame seed bun. Allergen information available at www.mcdonalds.co.uk/nutrition", new BigDecimal("6.59"));
-        FoodItem foodItem2 = new FoodItem("Steakhouse Stack", "Two 100% British and Irish beef patties, a slice of cheddar cheese, crispy onions, red onions and lettuce served with a black peppercorn sauce, all in a freshly toasted glazed sesame topped bun. Allergen info: www.mcdonalds.co.uk/nutrition", new BigDecimal("6.49"));
-        FoodItem foodItem3 = new FoodItem("test", "test123", new BigDecimal("44.76"));
+    public FoodItemMenu foodItemMenu() {
+        FoodItemMenu menu = new FoodItemMenu(1L, "Featured", new ArrayList<>());
+        FoodItem foodItem1 = new FoodItem(
+                1L,
+                "McSpicy® x Frank's RedHot®",
+                new BigDecimal("6.59"),
+                507,
+                "Hot and spicy 100% chicken breast in a crispy coating, served with lettuce, cheese made with Emmental, jalapenos, onions and a Frank’s RedHot® Mayo in a sesame seed bun. Allergen information available at www.mcdonalds.co.uk/nutrition",
+                "https://stevefengsbucket.s3.eu-west-2.amazonaws.com/Holy_Grail/mc_burger.avif"
+        );
+
+        FoodItem foodItem2 = new FoodItem(
+                2L,
+                "Steakhouse Stack",
+                new BigDecimal("6.49"),
+                667,
+                "Two 100% British and Irish beef patties, a slice of cheddar cheese, crispy onions, red onions and lettuce served with a black peppercorn sauce, all in a freshly toasted glazed sesame topped bun. Allergen info: www.mcdonalds.co.uk/nutrition",
+                "https://stevefengsbucket.s3.eu-west-2.amazonaws.com/Holy_Grail/mc_burger.avif"
+        );
 
         menu.addFoodItem(foodItem1);
         menu.addFoodItem(foodItem2);
-        menu.addFoodItem(foodItem3);
-
         return menu;
     }
 }
