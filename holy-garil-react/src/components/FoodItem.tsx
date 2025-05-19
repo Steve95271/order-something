@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
+import type {FoodItem as Item} from "../types/food.ts"
 
-interface Item {
-  id: number;
-  name: string;
-  price: number;
-  calorie: number;
-  description: string;
-  pictureUrl: string;
-}
 
 function FoodItem() {
   const [item, setItem] = useState<Item | null>();

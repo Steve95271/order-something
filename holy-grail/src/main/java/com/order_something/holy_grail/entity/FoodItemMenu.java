@@ -9,7 +9,6 @@ import java.util.ArrayList;
 @AllArgsConstructor
 public class FoodItemMenu {
 
-
     private Long Id;
     private String title;
     private final ArrayList<FoodItem> foodItems;
@@ -17,5 +16,5 @@ public class FoodItemMenu {
     public void addFoodItem(FoodItem foodItem) {
         this.foodItems.add(foodItem);
     }
-
+    public FoodItem getFoodItemById(Long id) {return foodItems.get(id.intValue() - 1);}
 }
