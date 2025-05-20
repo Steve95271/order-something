@@ -1,6 +1,7 @@
 import type { FoodItemMenu as Menu } from "../types/food.ts"
 import { useEffect, useState } from "react";
 import FoodItemCard from "./FoodItemCard";
+import classes from "../assets/styles/foodItemMenu.module.css";
 
 function FoodItemMenu(){
   const [menu, setMenu] = useState<Menu | null>(null);
@@ -22,21 +23,15 @@ function FoodItemMenu(){
       .finally(() => setLoading(false));
   }, []);
 
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
+    if (!menu) return <p>No data.</p>;
+
     return (
-        <div
-          style={{
-            display: "grid",
-            gap: "20px",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            margin: "0 auto",
-            maxWidth: "900px",
-            padding: "20px",
-          }}
-        >
+        <div className={classes.foodItemMenu}>
             {menu?.foodItems.map((item) => (
                 <FoodItemCard key={item.id} {...item}/>
             ))}
-            
         </div>
     );
 }
