@@ -1,0 +1,36 @@
+.food-item {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.food-item img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.food-item section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.food-item section h2 {
+  margin: 0 0 10px 0;
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.food-item section p {
+  margin: 0;
+  font-size: 16px;
+  color: #555;
+}

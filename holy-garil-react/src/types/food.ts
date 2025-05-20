@@ -8,6 +8,14 @@ export interface FoodItem {
 }
 
 export interface FoodItemMenu {
-    foodItems: FoodItem[];
+  foodItems: FoodItem[];
 }
 
+export interface FoodItemDetailInfo {
+  id: number;
+  name: string;
+  price: number;
+  calorie: number;
+  description: string;
+  pictureUrl: string;
+}
