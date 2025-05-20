@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./FoodItem.css";
+import type {FoodItem as Item} from "../types/food.ts"
 
 interface FoodItemDetailInfo {
   id: number;
