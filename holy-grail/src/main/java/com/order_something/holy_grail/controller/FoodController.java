@@ -120,7 +120,7 @@ public class FoodController {
 
     @GetMapping("/menu")
     public FoodItemMenu foodItemMenu() {
-        return menus.getFirst();
+        return menus.get(1);
     }
 
     @GetMapping("/menus")
