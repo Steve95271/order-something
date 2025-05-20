@@ -14,10 +14,13 @@ import java.util.ArrayList;
 @RequestMapping("/food")
 public class FoodController {
 
-    private final FoodItemMenu featuredMenu = new FoodItemMenu(1L, "Featured", new ArrayList<>());
-    private final FoodItemMenu whatsNewMenu = new FoodItemMenu(2L, "WhatsNew", new ArrayList<>());
+    private final ArrayList<FoodItemMenu> menus = new ArrayList<>();
 
     public FoodController() {
+
+        FoodItemMenu featuredMenu = new FoodItemMenu(1L, "Featured", new ArrayList<>());
+        FoodItemMenu whatsNewMenu = new FoodItemMenu(2L, "WhatsNew", new ArrayList<>());
+
         FoodItem foodItem1 = new FoodItem(
                 1L,
                 "McSpicy® x Frank's RedHot®",
@@ -80,6 +83,14 @@ public class FoodController {
         featuredMenu.addFoodItem(foodItem4);
         featuredMenu.addFoodItem(foodItem5);
         featuredMenu.addFoodItem(foodItem6);
+        whatsNewMenu.addFoodItem(foodItem1);
+        whatsNewMenu.addFoodItem(foodItem3);
+        whatsNewMenu.addFoodItem(foodItem5);
+        whatsNewMenu.addFoodItem(foodItem2);
+        whatsNewMenu.addFoodItem(foodItem4);
+
+        menus.add(featuredMenu);
+        menus.add(whatsNewMenu);
     }
 
     @GetMapping("/item")
@@ -98,17 +109,22 @@ public class FoodController {
     @GetMapping("/item/{id}")
     public FoodItem getItemMenu(@PathVariable Long id) {
         return new FoodItem(
-                featuredMenu.getFoodItemById(id).getId(),
-                featuredMenu.getFoodItemById(id).getName(),
-                featuredMenu.getFoodItemById(id).getPrice(),
-                featuredMenu.getFoodItemById(id).getCalorie(),
-                featuredMenu.getFoodItemById(id).getDescription(),
-                featuredMenu.getFoodItemById(id).getPictureUrl()
+                menus.getFirst().getFoodItemById(id).getId(),
+                menus.getFirst().getFoodItemById(id).getName(),
+                menus.getFirst().getFoodItemById(id).getPrice(),
+                menus.getFirst().getFoodItemById(id).getCalorie(),
+                menus.getFirst().getFoodItemById(id).getDescription(),
+                menus.getFirst().getFoodItemById(id).getPictureUrl()
         );
     }
 
     @GetMapping("/menu")
     public FoodItemMenu foodItemMenu() {
-        return featuredMenu;
+        return menus.getFirst();
+    }
+
+    @GetMapping("/menus")
+    public ArrayList<FoodItemMenu> foodItemMenuMenu() {
+        return menus;
     }
 }
