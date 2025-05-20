@@ -28,11 +28,12 @@ function FoodItemMenu(){
     if (!menu) return <p>No data.</p>;
 
     return (
-        <div className={classes.foodItemMenu}>
-            {menu?.foodItems.map((item) => (
-                <FoodItemCard key={item.id} {...item}/>
-            ))}
-        </div>
+      <div className={classes.foodItemMenu}>
+        <h2>{menu?.title}</h2>
+        {menu?.foodItems.map((item) => (
+          <FoodItemCard key={item.id} {...item}/>
+        ))}
+      </div>
     );
 }
 

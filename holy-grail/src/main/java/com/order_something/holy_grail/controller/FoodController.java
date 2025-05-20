@@ -14,7 +14,8 @@ import java.util.ArrayList;
 @RequestMapping("/food")
 public class FoodController {
 
-    private final FoodItemMenu menu = new FoodItemMenu(1L, "Featured", new ArrayList<>());
+    private final FoodItemMenu featuredMenu = new FoodItemMenu(1L, "Featured", new ArrayList<>());
+    private final FoodItemMenu whatsNewMenu = new FoodItemMenu(2L, "WhatsNew", new ArrayList<>());
 
     public FoodController() {
         FoodItem foodItem1 = new FoodItem(
@@ -73,12 +74,12 @@ public class FoodController {
 
 
 
-        menu.addFoodItem(foodItem1);
-        menu.addFoodItem(foodItem2);
-        menu.addFoodItem(foodItem3);
-        menu.addFoodItem(foodItem4);
-        menu.addFoodItem(foodItem5);
-        menu.addFoodItem(foodItem6);
+        featuredMenu.addFoodItem(foodItem1);
+        featuredMenu.addFoodItem(foodItem2);
+        featuredMenu.addFoodItem(foodItem3);
+        featuredMenu.addFoodItem(foodItem4);
+        featuredMenu.addFoodItem(foodItem5);
+        featuredMenu.addFoodItem(foodItem6);
     }
 
     @GetMapping("/item")
@@ -97,17 +98,17 @@ public class FoodController {
     @GetMapping("/item/{id}")
     public FoodItem getItemMenu(@PathVariable Long id) {
         return new FoodItem(
-                menu.getFoodItemById(id).getId(),
-                menu.getFoodItemById(id).getName(),
-                menu.getFoodItemById(id).getPrice(),
-                menu.getFoodItemById(id).getCalorie(),
-                menu.getFoodItemById(id).getDescription(),
-                menu.getFoodItemById(id).getPictureUrl()
+                featuredMenu.getFoodItemById(id).getId(),
+                featuredMenu.getFoodItemById(id).getName(),
+                featuredMenu.getFoodItemById(id).getPrice(),
+                featuredMenu.getFoodItemById(id).getCalorie(),
+                featuredMenu.getFoodItemById(id).getDescription(),
+                featuredMenu.getFoodItemById(id).getPictureUrl()
         );
     }
 
     @GetMapping("/menu")
     public FoodItemMenu foodItemMenu() {
-        return menu;
+        return featuredMenu;
     }
 }
