@@ -7,6 +7,7 @@ import com.order_something.holy_grail.service.FoodService;
 import com.order_something.holy_grail.vo.CategoryAndFoodVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ public class FoodServiceImpl implements FoodService {
     private final FoodRepository foodRepository;
 
     @Override
+    @Transactional
     public List<CategoryAndFoodVO> getCategoriesAndFoods() {
         // Get all categories
         List<Category> categories = foodRepository.getCategories();
