@@ -9,11 +9,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class Category {
-    private Long id;
-    private String title;
-    private List<FoodItem> foodItemList;
-
-    public void setItems(List<FoodItem> items) {
-        this.foodItemList = items;
-    }
+    /*
+        The fields of the Entity class is needed match database's columns name
+     */
+    private Long category_id;
+    private String category;
 }
