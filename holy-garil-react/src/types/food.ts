@@ -9,12 +9,11 @@ export interface FoodItem {
 
 export interface Category {
   id: number;
-  title: string;
+  category: string;
   foodItemList: FoodItem[];
 }
 
 export interface RestaurantMenu {
-  title: string;
   categories: Category[];
 }
 

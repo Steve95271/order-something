@@ -6,6 +6,7 @@ function FoodCategorySelector({
     selectedCategoryId, 
     onCategoryClick,
 }: CategorySelector) {
+    console.log(`Categories: ${categories}`);
 
     return (
       <div className={classes.categorySelector}>
@@ -20,7 +21,7 @@ function FoodCategorySelector({
                 }
                 onClick={() => onCategoryClick(category.id)}
             >
-              {category.title}
+              {category.category}
             </button>
           ))}
         </section>

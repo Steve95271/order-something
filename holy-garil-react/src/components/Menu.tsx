@@ -1,4 +1,4 @@
-import type { RestaurantMenu, Category, FoodItem } from "../types/food.ts"
+import type { RestaurantMenu, FoodItem } from "../types/food.ts"
 import { useEffect, useState, useRef } from "react";
 import Modal from "./Modal.tsx";
 import FoodItemDetail from "./FoodItemDetail.tsx";
@@ -6,7 +6,7 @@ import classes from "../assets/styles/foodItemMenu.module.css";
 import FoodCategorySelector from "./FoodCategorySelector.tsx"
 import FoodCategorySection from "./FoodCategorySection.tsx";
 
-function FoodItemMenu() {
+function Menu() {
   const [menu, setMenu] = useState<RestaurantMenu | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -26,7 +26,7 @@ function FoodItemMenu() {
 
   function handleCardClick(id: number) {
     if (!menu) return;
-    const allItems = menu.categories.flatMap((cat) => cat.foodItemList);
+    const allItems = menu.flatMap((cat) => cat.foodItemList);
     const foodItem = allItems.find((item) => item.id === id) ?? null;
     setSelected(foodItem);
   }
@@ -37,7 +37,7 @@ function FoodItemMenu() {
       .then(async (response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const data: RestaurantMenu = await response.json();
-        console.log(data);
+        console.log(`Full mune data: ${data}`);
         setMenu(data);
       })
       .catch((err) => {
@@ -56,13 +56,13 @@ function FoodItemMenu() {
       <div className={classes.foodItemMenu}>
 
       <FoodCategorySelector 
-        categories={menu.categories} 
+        categories={menu}
         selectedCategoryId={activeCategory} 
         onCategoryClick={handleCategoryClick}
       />
 
 
-      {menu.categories.map(category => (
+      {menu.map(category => (
         <FoodCategorySection
           key={category.id}
           category={category}
@@ -79,4 +79,4 @@ function FoodItemMenu() {
   );
 }
 
-export default FoodItemMenu
+export default Menu
