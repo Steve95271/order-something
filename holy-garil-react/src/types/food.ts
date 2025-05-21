@@ -7,9 +7,15 @@ export interface FoodItem {
   pictureUrl: string;
 }
 
-export interface FoodItemMenu {
+export interface Category {
+  id: number;
   title: string;
-  foodItems: FoodItem[];
+  foodItemList: FoodItem[];
+}
+
+export interface RestaurantMenu {
+  title: string;
+  categories: Category[];
 }
 
 export interface FoodItemDetailInfo {
@@ -19,4 +25,15 @@ export interface FoodItemDetailInfo {
   calorie: number;
   description: string;
   pictureUrl: string;
+}
+
+export interface CategorySelector {
+  categories: Category[];
+  selectedCategoryId: number | null;
+  onCategoryClick: (categoryId: number) => void;
+}
+
+export interface CategorySection {
+  category: Category;
+  onCardClick: (itemId: number) => void;
 }

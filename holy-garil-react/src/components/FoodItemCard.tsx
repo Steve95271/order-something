@@ -1,5 +1,6 @@
-import type { FoodItem } from "../types/food.ts";
+import type {FoodItem} from "../types/food.ts"
 import classes from "../assets/styles/foodItemCard.module.css";
+
 
 function FoodItemCard({
   pictureUrl,
@@ -19,7 +20,7 @@ function FoodItemCard({
         <p className={classes.description}>{description}</p>
       </div>
       <div className={classes.cardImageContainer}>
-        <img src={pictureUrl} alt={`A picture of a ${name}`} />
+        <img src={pictureUrl} alt={`A picture of a ${name}`}/>
       </div>
     </div>
   );

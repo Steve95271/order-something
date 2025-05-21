@@ -1,28 +1,42 @@
-import type { FoodItemMenu as Menu } from "../types/food.ts"
-import { useEffect, useState } from "react";
-import FoodItemCard from "./FoodItemCard";
+import type { RestaurantMenu, Category, FoodItem } from "../types/food.ts"
+import { useEffect, useState, useRef } from "react";
 import Modal from "./Modal.tsx";
 import FoodItemDetail from "./FoodItemDetail.tsx";
 import classes from "../assets/styles/foodItemMenu.module.css";
+import FoodCategorySelector from "./FoodCategorySelector.tsx"
+import FoodCategorySection from "./FoodCategorySection.tsx";
 
 function FoodItemMenu() {
-  const [menu, setMenu] = useState<Menu | null>(null);
+  const [menu, setMenu] = useState<RestaurantMenu | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [selected, setSelected] = useState<Menu["foodItems"][number] | null>(
-    null
-  );
+  const [selected, setSelected] = useState<FoodItem | null>(null);
+  const [activeCategory, setActiveCategory] = useState<number | null>(null);
+
+  const sectionRefs = useRef<Record<number, HTMLElement | null>>({});
+
+  const handleCategoryClick = (id: number) => {
+    setActiveCategory(id);
+    const section = sectionRefs.current[id];
+    if (section) {
+      section.scrollIntoView({behavior: "smooth"});
+    }
+  };
+
 
   function handleCardClick(id: number) {
-    const foodItem = menu?.foodItems.find((item) => item.id == id);
-    setSelected(foodItem ?? null);
+    if (!menu) return;
+    const allItems = menu.categories.flatMap((cat) => cat.foodItemList);
+    const foodItem = allItems.find((item) => item.id === id) ?? null;
+    setSelected(foodItem);
   }
+
 
   useEffect(() => {
     fetch(`http://localhost:8080/food/menu`)
       .then(async (response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data: Menu = await response.json();
+        const data: RestaurantMenu = await response.json();
         console.log(data);
         setMenu(data);
       })
@@ -40,12 +54,22 @@ function FoodItemMenu() {
   return (
     <>
       <div className={classes.foodItemMenu}>
-        <h2>{menu?.title}</h2>
-        {menu?.foodItems.map((item) => (
-          <div key={item.id} onClick={() => handleCardClick(item.id)}>
-            <FoodItemCard {...item} />
-          </div>
-        ))}
+
+      <FoodCategorySelector 
+        categories={menu.categories} 
+        selectedCategoryId={activeCategory} 
+        onCategoryClick={handleCategoryClick}
+      />
+
+
+      {menu.categories.map(category => (
+        <FoodCategorySection
+          key={category.id}
+          category={category}
+          onCardClick={handleCardClick}
+          ref={el => {sectionRefs.current[category.id] = el}}
+        />
+      ))}
       </div>
 
       <Modal open={!!selected} onClose={() => setSelected(null)}>
