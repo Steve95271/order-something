@@ -37,7 +37,7 @@ function Menu() {
       .then(async (response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const data: Category[] = await response.json();
-        console.log(`Full mune data: ${data}`);
+        console.log(data);
         setMenu(data);
       })
       .catch((err) => {
