@@ -19,7 +19,7 @@ public class FoodRepository {
      */
     public List<Category> getCategories() {
         String sqlCategories = """
-                SELECT category_id, category
+                SELECT category_id, name
                 FROM category
                 """;
 
@@ -27,7 +27,7 @@ public class FoodRepository {
                 sqlCategories,
                 (rs, rowNum) -> new Category(
                         rs.getLong("category_id"),
-                        rs.getString("category")
+                        rs.getString("name")
                 )
         );
     }
@@ -39,7 +39,7 @@ public class FoodRepository {
      */
     public List<FoodItem> getFoodByCategoryId(Long categoryId) {
         String sqlItemsByCategory = """
-                SELECT f.food_id, f.name, f.price, f.calorie, f.description, f.pictureUrl
+                SELECT f.food_id, f.name, f.price, f.calories, f.description, f.pictureUrl
                 FROM food_category fc
                 JOIN food f ON fc.food_id = f.food_id
                 WHERE fc.category_id = ?
@@ -51,7 +51,7 @@ public class FoodRepository {
                         rs.getLong("food_id"),
                         rs.getString("name"),
                         rs.getBigDecimal("price"),
-                        rs.getInt("calorie"),
+                        rs.getInt("calories"),
                         rs.getString("description"),
                         rs.getString("pictureUrl")
                 ), categoryId

@@ -13,5 +13,5 @@ public class Category {
         The fields of the Entity class is needed match database's columns name
      */
     private Long category_id;
-    private String category;
+    private String name;
 }

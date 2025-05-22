@@ -35,7 +35,7 @@ public class FoodServiceImpl implements FoodService {
             // Create categoryAndFood object and add to list
             categoryAndFoodVOList.add(new CategoryAndFoodVO(
                         c.getCategory_id(),
-                        c.getCategory(),
+                        c.getName(),
                         foodItemList
             ));
         }

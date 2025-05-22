@@ -8,14 +8,14 @@ CREATE TABLE food (
     food_id INT UNSIGNED auto_increment primary key,
     name VARCHAR(255),
     price VARCHAR(255),
-    calorie SMALLINT UNSIGNED,
+    calories SMALLINT UNSIGNED,
     description VARCHAR(255),
     pictureUrl VARCHAR(255)
 );
 
 CREATE TABLE category (
     category_id INT UNSIGNED auto_increment primary key,
-    category VARCHAR(32)
+    name VARCHAR(32)
 );
 
 CREATE TABLE food_category (

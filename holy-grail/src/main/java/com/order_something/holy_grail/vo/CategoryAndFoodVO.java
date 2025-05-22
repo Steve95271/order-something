@@ -11,6 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 public class CategoryAndFoodVO {
     private Long id;
-    private String category;
+    private String name;
     private List<FoodItem> foodItemList;
 }

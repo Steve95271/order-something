@@ -2,14 +2,14 @@ export interface FoodItem {
   id: number;
   name: string;
   price: number;
-  calorie: number;
+  calories: number;
   description: string;
   pictureUrl: string;
 }
 
 export interface Category {
   id: number;
-  category: string;
+  name: string;
   foodItemList: FoodItem[];
 }
 
@@ -21,7 +21,7 @@ export interface FoodItemDetailInfo {
   id: number;
   name: string;
   price: number;
-  calorie: number;
+  calories: number;
   description: string;
   pictureUrl: string;
 }

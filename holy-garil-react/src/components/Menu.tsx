@@ -1,4 +1,4 @@
-import type { RestaurantMenu, FoodItem } from "../types/food.ts"
+import type { FoodItem, Category, } from "../types/food.ts"
 import { useEffect, useState, useRef } from "react";
 import Modal from "./Modal.tsx";
 import FoodItemDetail from "./FoodItemDetail.tsx";
@@ -7,7 +7,7 @@ import FoodCategorySelector from "./FoodCategorySelector.tsx"
 import FoodCategorySection from "./FoodCategorySection.tsx";
 
 function Menu() {
-  const [menu, setMenu] = useState<RestaurantMenu | null>(null);
+  const [menu, setMenu] = useState<Category[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [selected, setSelected] = useState<FoodItem | null>(null);
@@ -15,13 +15,13 @@ function Menu() {
 
   const sectionRefs = useRef<Record<number, HTMLElement | null>>({});
 
-  const handleCategoryClick = (id: number) => {
+  function handleCategoryClick(id: number) {
     setActiveCategory(id);
     const section = sectionRefs.current[id];
     if (section) {
       section.scrollIntoView({behavior: "smooth"});
     }
-  };
+  }
 
 
   function handleCardClick(id: number) {
@@ -36,7 +36,7 @@ function Menu() {
     fetch(`http://localhost:8080/food/menu`)
       .then(async (response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data: RestaurantMenu = await response.json();
+        const data: Category[] = await response.json();
         console.log(`Full mune data: ${data}`);
         setMenu(data);
       })

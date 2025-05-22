@@ -7,7 +7,7 @@ import classes from "../assets/styles/foodCategory.module.css"
 const FoodCategorySection = forwardRef<HTMLElement, CategorySection>(
   ({category, onCardClick}, ref) => (
       <section key={category.id} className={classes.categorySection} ref={ref}>
-        <h2>{category.category}</h2>
+        <h2>{category.name}</h2>
         {category.foodItemList.map((item: FoodItem) => (
           <div
             key={item.id}

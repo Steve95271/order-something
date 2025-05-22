@@ -21,7 +21,7 @@ function FoodCategorySelector({
                 }
                 onClick={() => onCategoryClick(category.id)}
             >
-              {category.category}
+              {category.name}
             </button>
           ))}
         </section>

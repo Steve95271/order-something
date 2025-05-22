@@ -1,7 +1,7 @@
 USE holy_grail;
 
 
-INSERT INTO food (name, price, calorie, description, pictureUrl)
+INSERT INTO food (name, price, calories, description, pictureUrl)
 VALUES ('McSpicy® x Frank\'s RedHot®',
         '6.59',
         507,
@@ -93,7 +93,7 @@ VALUES ('McSpicy® x Frank\'s RedHot®',
         'https://stevefengsbucket.s3.eu-west-2.amazonaws.com/Holy_Grail/mc_burger.avif'
        );
 
-INSERT INTO category (category)
+INSERT INTO category (name)
 VALUES ('Featured'),
        ('What\'s New?'),
        ('Sharers & Bundles');

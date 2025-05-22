@@ -6,7 +6,7 @@ function FoodItemCard({
   pictureUrl,
   name,
   price,
-  calorie,
+  calories,
   description,
 }: FoodItem) {
   return (
@@ -15,7 +15,7 @@ function FoodItemCard({
         <h4>{name}</h4>
         <p>
           <span className={classes.price}>£{price}</span>
-          <span className={classes.calories}> • {calorie} kcal</span>
+          <span className={classes.calories}> • {calories} kcal</span>
         </p>
         <p className={classes.description}>{description}</p>
       </div>
